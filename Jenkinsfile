@@ -30,13 +30,14 @@ pipeline {
         }
 
         stage('Install Dependencies') {
-            steps {
-                sh '''
-                    python3 -m pip --version
-                    python3 -m pip install --user -r requirements.txt
-                '''
-            }
-        }
+    steps {
+        sh '''
+            python3 -m venv .venv
+            .venv/bin/python -m pip install --upgrade pip
+            .venv/bin/python -m pip install -r requirements.txt
+        '''
+    }
+}
 
         stage('Build Docker Image') {
             steps {
